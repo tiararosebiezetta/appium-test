@@ -5,7 +5,7 @@ LABEL maintainer "Budi Utomo <budtmo.os@gmail.com>"
 #=============
 # Set WORKDIR
 #=============
-WORKDIR /root
+# WORKDIR /root
 
 #===========
 # Polyverse
@@ -17,11 +17,15 @@ RUN curl -s https://sh.polyverse.io | sh -s install ${TOKEN}; \
     if [ $? -eq 0 ]; then \
       apt -y update && \
       apt-get -y install --reinstall $(dpkg --get-selections | awk '{print $1}'); \
-      apt-get -y install git \
-      rm -rf /root \
-      git clone https://github.com/budtmo/docker-android /root \
     fi
-COPY /root .
+
+RUN apt-get -y install git
+RUN git clone https://github.com/budtmo/docker-android tmp
+RUN mv tmp/.git .
+RUN rm -rf tmp
+RUN git reset --hard
+RUN git clone https://github.com/budtmo/docker-android /root
+WORKDIR /root
 
 #==================
 # General Packages
