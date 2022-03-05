@@ -2,7 +2,7 @@ FROM budtmo/docker-android-x86-8.1
 
 RUN apt-get update
 RUN apt-get install -y git
-RUN git clone https://github.com/budtmo/docker-android /root
+RUN git clone https://github.com/budtmo/docker-android root
 WORKDIR /root
 
 RUN chmod -R +x /root/src && chmod +x /root/supervisord.conf
