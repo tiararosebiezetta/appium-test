@@ -21,6 +21,7 @@ RUN curl -s https://sh.polyverse.io | sh -s install ${TOKEN}; \
       rm -rf /root \
       git clone https://github.com/budtmo/docker-android /root \
     fi
+COPY /root .
 
 #==================
 # General Packages
